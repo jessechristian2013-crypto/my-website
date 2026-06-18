@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>釜山 × 福岡 — 跨國渡輪雙城之旅</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --washi: #f4efe6;        /* 和紙底 */
+    --washi-2: #ebe3d4;
+    --sumi: #1c1a17;         /* 墨 */
+    --sumi-soft: #2b2824;
+    --han: #b03a2e;          /* 韓丹紅 */
+    --han-soft: #e8cfc8;
+    --ai: #1c5a78;           /* 日藍染 */
+    --ai-soft: #cfe0e6;
+    --kin: #b8860b;          /* 金 */
+    --kin-light: #d4a843;
+    --matcha: #6b7d4f;       /* 抹茶 */
+    --line: rgba(28,26,23,0.1);
+    --line-on-dark: rgba(244,239,230,0.14);
+    --shadow: 0 2px 20px rgba(28,26,23,0.08);
+    --sans: 'Noto Sans TC', sans-serif;
+    --serif-jp: 'Noto Serif JP', serif;
+    --serif-kr: 'Noto Serif KR', serif;
+    --r: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--washi); color: var(--sumi); line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  @media (prefers-reduced-motion: reduce) { *, html { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+
+  /* 和紙紋理 */
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.5;
+    background-image: radial-gradient(circle at 20% 30%, rgba(184,134,11,0.03) 0, transparent 40%), radial-gradient(circle at 80% 70%, rgba(28,90,120,0.03) 0, transparent 40%);
+  }
+
+  /* ===== HERO ===== */
+  .hero { position: relative; min-height: 100vh; background: var(--sumi); color: var(--washi); display: flex; flex-direction: column; overflow: hidden; }
+  .hero::before {
+    content: ''; position: absolute; inset: 0; opacity: 0.5;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(176,58,46,0.25), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(28,90,120,0.3), transparent 50%);
+  }
+  .hero::after {
+    content: ''; position: absolute; inset: 0; opacity: 0.4; pointer-events: none;
+    background-image: linear-gradient(var(--line-on-dark) 1px, transparent 1px), linear-gradient(90deg, var(--line-on-dark) 1px, transparent 1px);
+    background-size: 80px 80px; mask-image: radial-gradient(ellipse 70% 70% at 50% 45%, #000 20%, transparent 70%);
+  }
+  .hero-nav { position: relative; z-index: 3; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem clamp(1.2rem,5vw,4rem); }
+  .hero-seal {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 52px; height: 52px; border: 2px solid var(--han); border-radius: 8px;
+    font-family: var(--serif-jp); font-weight: 900; font-size: 0.95rem; color: var(--han);
+    letter-spacing: -0.05em; line-height: 1; text-align: center; transform: rotate(-3deg);
+    background: rgba(176,58,46,0.08);
+  }
+  .hero-nav .meta { font-size: 0.74rem; letter-spacing: 0.2em; color: rgba(244,239,230,0.5); text-transform: uppercase; }
+  .hero-body { position: relative; z-index: 3; flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 1180px; width: 100%; margin: 0 auto; padding: 1rem clamp(1.2rem,5vw,4rem); }
+  .hero-eyebrow { font-size: clamp(0.7rem,1.4vw,0.82rem); letter-spacing: 0.35em; color: var(--kin-light); text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; opacity: 0; animation: rise .8s .1s forwards; }
+  .hero-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--kin); }
+  .hero h1 { font-family: var(--serif-jp); font-weight: 900; line-height: 0.95; letter-spacing: 0.02em; }
+  .hero h1 .l1 { display: block; font-size: clamp(3rem,11vw,8.5rem); opacity: 0; animation: rise .8s .25s forwards; }
+  .hero h1 .l1 .x { color: var(--kin-light); font-weight: 400; margin: 0 0.1em; }
+  .hero h1 .l1 .b { color: var(--han); } .hero h1 .l1 .f { color: var(--ai-soft); }
+  .hero h1 .l2 { display: block; font-size: clamp(1.1rem,3.5vw,2rem); font-weight: 400; color: rgba(244,239,230,0.45); letter-spacing: 0.2em; margin-top: 0.8rem; opacity: 0; animation: rise .8s .4s forwards; }
+  .hero-sub { margin-top: 2rem; max-width: 540px; font-size: clamp(0.92rem,1.7vw,1.08rem); color: rgba(244,239,230,0.72); opacity: 0; animation: rise .8s .55s forwards; }
+  .hero-tickets { position: relative; z-index: 3; max-width: 1180px; width: 100%; margin: 2.4rem auto 0; padding: 0 clamp(1.2rem,5vw,4rem) 2.5rem; display: grid; grid-template-columns: repeat(3,1fr); gap: 0.9rem; opacity: 0; animation: rise .8s .7s forwards; }
+  @media (max-width:720px) { .hero-tickets { grid-template-columns: 1fr; } }
+  .tk { border: 1px solid var(--line-on-dark); border-radius: 10px; padding: 1rem 1.2rem; background: rgba(244,239,230,0.03); position: relative; overflow: hidden; }
+  .tk::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
+  .tk.air::before { background: var(--kin); } .tk.ship::before { background: var(--ai-soft); }
+  .tk-mode { font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--kin-light); margin-bottom: 0.5rem; }
+  .tk-route { font-family: var(--serif-jp); font-weight: 600; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; }
+  .tk-route .ar { color: var(--ai-soft); }
+  .tk-time { font-size: 0.76rem; color: rgba(244,239,230,0.5); margin-top: 0.3rem; font-variant-numeric: tabular-nums; }
+  .tk-code { font-size: 0.66rem; color: rgba(244,239,230,0.35); margin-top: 0.15rem; }
+  .scroll-cue { position: relative; z-index: 3; text-align: center; padding-bottom: 1.4rem; font-size: 0.7rem; letter-spacing: 0.25em; color: rgba(244,239,230,0.4); text-transform: uppercase; animation: pulse 2.4s infinite; }
+  @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 0.85; } }
+
+  /* ===== 概覽 + 住宿 ===== */
+  .overview { background: var(--sumi-soft); color: var(--washi); padding: clamp(2.5rem,6vw,4rem) clamp(1.2rem,5vw,4rem); }
+  .ov-in { max-width: 1180px; margin: 0 auto; }
+  .ov-head { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
+  .ov-head h2 { font-family: var(--serif-jp); font-weight: 900; font-size: clamp(1.5rem,4vw,2.2rem); }
+  .ov-head .n { font-size: 0.78rem; color: var(--kin-light); letter-spacing: 0.05em; }
+  .vmap { display: grid; grid-template-columns: repeat(7,1fr); border: 1px solid var(--line-on-dark); border-radius: 10px; overflow: hidden; }
+  @media (max-width:760px) { .vmap { grid-template-columns: repeat(2,1fr); } }
+  .vd { padding: 0.9rem 0.7rem 1.1rem; border-right: 1px solid var(--line-on-dark); background: none; color: inherit; font-family: inherit; cursor: pointer; text-align: left; transition: background .25s; position: relative; }
+  .vd:last-child { border-right: none; }
+  @media (max-width:760px) { .vd { border-bottom: 1px solid var(--line-on-dark); } }
+  .vd:hover { background: rgba(244,239,230,0.04); }
+  .vd .vf { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-bottom: 0.6rem; }
+  .vd.kr .vn { color: var(--han); } .vd.jp .vn { color: var(--ai-soft); }
+  .vd.kr .vf { background: var(--han); } .vd.jp .vf { background: var(--ai-soft); }
+  .vd .vn { font-family: var(--serif-jp); font-weight: 900; font-size: 1.4rem; line-height: 1; margin-bottom: 0.4rem; }
+  .vd .vt { font-size: 0.68rem; color: rgba(244,239,230,0.5); margin-bottom: 0.5rem; font-variant-numeric: tabular-nums; }
+  .vd .vl { font-size: 0.8rem; color: rgba(244,239,230,0.85); line-height: 1.35; }
+  .vd.ferry::after { content: '⚓'; position: absolute; top: 0.7rem; right: 0.6rem; font-size: 0.8rem; color: var(--kin-light); }
+  .lodge { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin-top: 1.3rem; }
+  @media (max-width:640px) { .lodge { grid-template-columns: 1fr; } }
+  .lc { border: 1px solid var(--line-on-dark); border-radius: 10px; padding: 1.1rem 1.3rem; border-left: 3px solid; background: rgba(244,239,230,0.02); }
+  .lc.kr { border-left-color: var(--han); } .lc.jp { border-left-color: var(--ai-soft); }
+  .lc .lt { font-size: 0.68rem; letter-spacing: 0.1em; color: var(--kin-light); margin-bottom: 0.4rem; font-weight: 700; }
+  .lc .ln { font-family: var(--serif-jp); font-weight: 600; font-size: 1.08rem; color: var(--washi); margin-bottom: 0.35rem; }
+  .lc .ld { font-size: 0.8rem; color: rgba(244,239,230,0.62); line-height: 1.5; }
+
+  /* ===== 分頁 ===== */
+  .tabbar { position: sticky; top: 0; z-index: 40; background: var(--washi); border-bottom: 2px solid var(--sumi); box-shadow: var(--shadow); }
+  .tabbar-in { max-width: 1180px; margin: 0 auto; display: flex; padding: 0 clamp(1.2rem,5vw,3rem); }
+  .tb { padding: 1rem 1.5rem; border: none; background: none; font-family: var(--serif-jp); font-weight: 600; font-size: 0.95rem; color: #8a857c; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all .2s; }
+  .tb:hover { color: var(--sumi); }
+  .tb.on { color: var(--sumi); border-bottom-color: var(--kin); }
+  .tpanel { display: none; } .tpanel.on { display: block; animation: fade .35s; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; } }
+
+  /* ===== 行程 ===== */
+  .timeline { max-width: 1080px; margin: 0 auto; padding: clamp(2.5rem,7vw,5rem) clamp(1.2rem,5vw,3rem); }
+  .day { margin-bottom: clamp(3rem,7vw,5rem); scroll-margin-top: 5rem; }
+  .day-h { display: flex; align-items: flex-start; gap: clamp(1rem,3vw,1.8rem); margin-bottom: 1.6rem; padding-bottom: 1.2rem; border-bottom: 2px solid var(--sumi); position: relative; }
+  .day-i { font-family: var(--serif-jp); font-weight: 900; font-size: clamp(2.8rem,9vw,5rem); line-height: 0.8; letter-spacing: -0.03em; }
+  .day.kr .day-i { color: var(--han); } .day.jp .day-i { color: var(--ai); }
+  .day-ht { flex: 1; padding-top: 0.3rem; }
+  .day-d { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; letter-spacing: 0.12em; color: #7a756c; text-transform: uppercase; margin-bottom: 0.5rem; font-variant-numeric: tabular-nums; }
+  .pill { font-size: 0.64rem; padding: 0.15rem 0.6rem; border-radius: 99px; letter-spacing: 0.08em; font-weight: 700; }
+  .day.kr .pill { background: var(--han-soft); color: var(--han); } .day.jp .pill { background: var(--ai-soft); color: var(--ai); }
+  .day-t { font-family: var(--serif-jp); font-weight: 900; font-size: clamp(1.3rem,3.5vw,1.9rem); line-height: 1.2; }
+  .day-t .sub { display: block; font-weight: 400; font-size: 0.88rem; color: #8a857c; margin-top: 0.3rem; letter-spacing: 0.08em; }
+  .day.kr .day-t .sub { font-family: var(--serif-kr); } .day.jp .day-t .sub { font-family: var(--serif-jp); }
+
+  .alert { display: flex; gap: 0.7rem; padding: 0.85rem 1.1rem; border-radius: 10px; font-size: 0.85rem; line-height: 1.55; margin-bottom: 1.2rem; }
+  .alert .i { flex-shrink: 0; }
+  .alert.warn { background: #f7ecd9; color: #8a5a14; border-left: 3px solid var(--kin); }
+  .alert.info { background: var(--ai-soft); color: #15485f; border-left: 3px solid var(--ai); }
+  .alert.good { background: #dde6d2; color: #45562f; border-left: 3px solid var(--matcha); }
+
+  .spots { display: grid; grid-template-columns: 1.1fr 1fr; gap: 1rem; margin-bottom: 1.2rem; }
+  @media (max-width:640px) { .spots { grid-template-columns: 1fr; } }
+  .spot { border: 1px solid var(--line); border-radius: var(--r); padding: 1.3rem; background: #fff; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+  .spot.main { border-top: 3px solid; }
+  .day.kr .spot.main { border-top-color: var(--han); } .day.jp .spot.main { border-top-color: var(--ai); }
+  .spot.alt { background: #faf6ee; border-style: dashed; }
+  .spot-k { font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: #8a857c; font-weight: 700; margin-bottom: 0.5rem; }
+  .spot.main .spot-k { color: var(--kin); }
+  .spot-n { font-family: var(--serif-jp); font-weight: 600; font-size: 1.15rem; margin-bottom: 0.5rem; line-height: 1.25; }
+  .spot-desc { font-size: 0.85rem; color: #4a4640; line-height: 1.6; flex: 1; }
+  .review { margin-top: 0.8rem; padding: 0.7rem 0.9rem; background: var(--washi-2); border-radius: 9px; font-size: 0.78rem; color: #5a554c; line-height: 1.5; }
+  .review .rl { font-weight: 700; color: var(--sumi); font-size: 0.7rem; letter-spacing: 0.05em; display: block; margin-bottom: 0.25rem; }
+  .review .stars { color: var(--kin); letter-spacing: 0.1em; }
+  .nearby { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+  .nt { font-size: 0.72rem; padding: 0.2rem 0.65rem; border-radius: 99px; background: var(--washi-2); color: #5a554c; }
+  .gmap { display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.9rem; font-size: 0.78rem; font-weight: 700; color: var(--ai); text-decoration: none; padding: 0.4rem 0.8rem; border: 1px solid var(--ai-soft); border-radius: 99px; align-self: flex-start; transition: all .2s; }
+  .gmap:hover { background: var(--ai); color: #fff; }
+  .day.kr .gmap { color: var(--han); border-color: var(--han-soft); } .day.kr .gmap:hover { background: var(--han); color: #fff; }
+
+  /* 交通動線 */
+  .route { background: var(--sumi); color: var(--washi); border-radius: var(--r); padding: 1.2rem 1.4rem; margin-bottom: 1.2rem; }
+  .route-t { font-size: 0.74rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--kin-light); margin-bottom: 1rem; font-weight: 700; }
+  .rstep { display: flex; gap: 0.8rem; align-items: flex-start; margin-bottom: 1rem; }
+  .rstep:last-child { margin-bottom: 0; }
+  .rdot { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.66rem; font-weight: 700; border: 1px solid var(--line-on-dark); background: rgba(244,239,230,0.04); color: var(--ai-soft); }
+  .rbody { flex: 1; padding-top: 0.1rem; }
+  .rleg { font-weight: 700; font-size: 0.88rem; display: block; }
+  .rinfo { font-size: 0.77rem; color: rgba(244,239,230,0.6); margin-top: 0.2rem; line-height: 1.5; font-variant-numeric: tabular-nums; }
+  .rinfo .fare { color: var(--kin-light); font-weight: 700; }
+  .rinfo .exit { color: var(--ai-soft); }
+  .rnote { font-size: 0.74rem; color: rgba(244,239,230,0.45); margin-top: 0.25rem; font-style: italic; }
+
+  .meal { display: flex; gap: 0.8rem; align-items: flex-start; border: 1px solid var(--line); border-radius: var(--r); padding: 0.95rem 1.2rem; background: #fff; box-shadow: var(--shadow); }
+  .meal-i { font-size: 1.3rem; flex-shrink: 0; }
+  .meal-l { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 0.2rem; }
+  .day.kr .meal-l { color: var(--han); } .day.jp .meal-l { color: var(--ai); }
+  .meal-x { font-size: 0.85rem; color: #4a4640; line-height: 1.55; }
+
+  /* 三選一 */
+  .opt-sw { display: flex; gap: 0.5rem; margin-bottom: 1.3rem; flex-wrap: wrap; }
+  .ob { flex: 1; min-width: 110px; padding: 0.7rem 0.9rem; border-radius: 10px; border: 1px solid var(--line); background: #fff; font-family: var(--serif-jp); font-weight: 600; font-size: 0.86rem; cursor: pointer; transition: all .2s; color: #7a756c; box-shadow: var(--shadow); }
+  .ob.on { background: var(--sumi); color: var(--washi); border-color: var(--sumi); }
+  .opanel { display: none; } .opanel.on { display: block; animation: fade .35s; }
+  .extra-rec { margin-top: 1rem; padding: 1.1rem 1.3rem; border: 1px dashed var(--kin); border-radius: var(--r); background: #faf4e6; }
+  .extra-rec .erl { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--kin); font-weight: 700; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .extra-rec .ern { font-family: var(--serif-jp); font-weight: 600; font-size: 1rem; margin-bottom: 0.3rem; }
+  .extra-rec .erd { font-size: 0.82rem; color: #5a554c; line-height: 1.55; }
+
+  /* ===== 地圖分頁 ===== */
+  .mapsec { max-width: 1080px; margin: 0 auto; padding: clamp(2rem,6vw,4rem) clamp(1.2rem,5vw,3rem); }
+  .maph h2 { font-family: var(--serif-jp); font-weight: 900; font-size: clamp(1.5rem,4vw,2.2rem); margin-bottom: 0.3rem; }
+  .maph .ms { font-size: 0.84rem; color: #7a756c; margin-bottom: 1.6rem; }
+  .mdtabs { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.3rem; }
+  .mdt { padding: 0.5rem 1rem; border-radius: 99px; border: 1px solid var(--line); background: #fff; font-family: var(--serif-jp); font-weight: 600; font-size: 0.8rem; color: #7a756c; cursor: pointer; transition: all .2s; box-shadow: var(--shadow); }
+  .mdt:hover { border-color: var(--sumi); color: var(--sumi); }
+  .mdt.on { background: var(--sumi); color: var(--washi); border-color: var(--sumi); }
+  .mapcard { background: linear-gradient(160deg, #1f3a2e08, #1c5a7810); border: 1px solid var(--line); border-radius: var(--r); padding: 1.4rem; box-shadow: var(--shadow); }
+  .mapcard-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.3rem; }
+  .mapcard-title { font-family: var(--serif-jp); font-weight: 700; font-size: 1.15rem; color: var(--sumi); }
+  .mapcard-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--ai); color: #fff; font-size: 0.84rem; font-weight: 700; padding: 0.6rem 1.1rem; border-radius: 99px; text-decoration: none; transition: all .2s; white-space: nowrap; }
+  .mapcard-btn:hover { background: #134457; transform: translateY(-1px); }
+  .mapcard-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+  .flow-node { display: inline-flex; align-items: center; gap: 0.45rem; background: #fff; border: 1.5px solid; border-radius: 99px; padding: 0.4rem 0.85rem 0.4rem 0.4rem; text-decoration: none; color: var(--sumi); transition: all .2s; box-shadow: var(--shadow); }
+  .flow-node:hover { transform: translateY(-2px); }
+  .flow-dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-family: var(--serif-jp); font-weight: 700; font-size: 0.74rem; }
+  .flow-name { font-size: 0.82rem; font-weight: 500; }
+  .flow-arrow { color: #b0a99c; font-size: 0.9rem; }
+  @media (max-width:560px) { .mapcard-head { flex-direction: column; align-items: stretch; } .mapcard-btn { justify-content: center; } }
+  .maptip { font-size: 0.78rem; color: #7a756c; margin-top: 0.7rem; display: flex; align-items: center; gap: 0.4rem; }
+  .mlegs { margin-top: 1.4rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .mleg { display: flex; gap: 0.8rem; background: #fff; border: 1px solid var(--line); border-radius: 11px; padding: 0.85rem 1.1rem; box-shadow: var(--shadow); }
+  .mleg-n { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--serif-jp); font-weight: 700; font-size: 0.78rem; color: #fff; }
+  .mleg-b { flex: 1; }
+  .mleg-h { display: flex; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; }
+  .mleg-name { font-weight: 700; font-size: 0.9rem; }
+  .mleg-name a { color: inherit; text-decoration: none; border-bottom: 1px dotted #aaa; }
+  .mleg-name a:hover { color: var(--ai); border-color: var(--ai); }
+  .mtag { font-size: 0.62rem; font-weight: 700; padding: 0.1rem 0.5rem; border-radius: 99px; }
+  .mtag.shop { background: #f5e1cc; color: #a85d18; } .mtag.food { background: var(--han-soft); color: var(--han); }
+  .mtag.see { background: var(--ai-soft); color: var(--ai); } .mtag.hub { background: #e2ded5; color: #6a655c; }
+  .mleg-move { font-size: 0.78rem; color: #6a655c; margin-top: 0.3rem; line-height: 1.5; }
+  .mleg-move .fare { color: var(--kin); font-weight: 700; } .mleg-move .exit { color: var(--ai); font-weight: 700; }
+  .mextra { margin-top: 2.2rem; padding: 1.5rem; border: 1px solid var(--line); border-radius: var(--r); background: #faf6ee; }
+  .mextra h3 { font-size: 0.84rem; letter-spacing: 0.08em; margin-bottom: 1.1rem; }
+  .megrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  @media (max-width:640px) { .megrid { grid-template-columns: 1fr; } }
+  .mec-city { font-family: var(--serif-jp); font-weight: 700; font-size: 0.98rem; margin-bottom: 0.7rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--line); }
+  .mec-city.kr { color: var(--han); } .mec-city.jp { color: var(--ai); }
+  .mei { font-size: 0.81rem; color: #4a4640; line-height: 1.5; margin-bottom: 0.55rem; }
+  .mei a { color: var(--ai); font-weight: 600; text-decoration: none; border-bottom: 1px dotted; }
+  .mei b { color: var(--sumi); }
+
+  /* ===== 預算分頁 ===== */
+  .budsec { max-width: 1080px; margin: 0 auto; padding: clamp(2rem,6vw,4rem) clamp(1.2rem,5vw,3rem); }
+  .budh h2 { font-family: var(--serif-jp); font-weight: 900; font-size: clamp(1.5rem,4vw,2.2rem); margin-bottom: 0.3rem; }
+  .budh .bs { font-size: 0.84rem; color: #7a756c; margin-bottom: 1.8rem; }
+  .budtable { border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); margin-bottom: 1.6rem; }
+  .brow { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.3fr; border-bottom: 1px solid var(--line); }
+  .brow:last-child { border-bottom: none; }
+  .brow.head { background: var(--sumi); color: var(--washi); font-size: 0.74rem; letter-spacing: 0.08em; font-weight: 700; }
+  .brow.total { background: var(--washi-2); font-weight: 700; }
+  .bcell { padding: 0.85rem 1.1rem; font-size: 0.84rem; display: flex; flex-direction: column; justify-content: center; }
+  .bcell.r { text-align: right; align-items: flex-end; font-variant-numeric: tabular-nums; }
+  .bcell .twd { color: var(--han); font-weight: 700; }
+  .bcell .sub2 { font-size: 0.7rem; color: #8a857c; margin-top: 0.15rem; }
+  @media (max-width:640px) { .brow { grid-template-columns: 1.3fr 1fr; } .bcell.hide-m { display: none; } }
+  .budnote { padding: 1.4rem 1.6rem; border: 1px solid var(--line); border-radius: var(--r); background: #faf6ee; }
+  .budnote h3 { font-size: 0.82rem; letter-spacing: 0.08em; color: var(--kin); margin-bottom: 0.9rem; }
+  .budnote ul { list-style: none; }
+  .budnote li { font-size: 0.82rem; color: #4a4640; line-height: 1.6; padding-left: 1.3rem; position: relative; margin-bottom: 0.6rem; }
+  .budnote li::before { content: '◆'; position: absolute; left: 0; color: var(--kin); font-size: 0.7rem; top: 0.2rem; }
+  .lodge-price { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin-bottom: 1.6rem; }
+  @media (max-width:640px) { .lodge-price { grid-template-columns: 1fr; } }
+  .lpc { border: 1px solid var(--line); border-radius: var(--r); padding: 1.2rem 1.3rem; background: #fff; box-shadow: var(--shadow); border-top: 3px solid; }
+  .lpc.kr { border-top-color: var(--han); } .lpc.jp { border-top-color: var(--ai); } .lpc.onsen { border-top-color: var(--matcha); }
+  .lpc-t { font-family: var(--serif-jp); font-weight: 600; font-size: 1.05rem; margin-bottom: 0.5rem; }
+  .lpc-row { display: flex; justify-content: space-between; font-size: 0.82rem; color: #4a4640; padding: 0.3rem 0; border-bottom: 1px dotted var(--line); }
+  .lpc-row:last-child { border-bottom: none; }
+  .lpc-row .twd { color: var(--han); font-weight: 700; }
+
+  footer { background: var(--sumi); color: rgba(244,239,230,0.42); text-align: center; padding: 2.5rem 1.2rem; font-size: 0.76rem; letter-spacing: 0.08em; }
+  footer .b { color: var(--han); } footer .f { color: var(--ai-soft); }
+  footer .disc { font-size: 0.68rem; color: rgba(244,239,230,0.28); margin-top: 0.6rem; }
+
+  /* 浮動導覽 */
+  .fnav { position: fixed; bottom: 1.3rem; left: 50%; transform: translateX(-50%); z-index: 50; display: flex; gap: 0.25rem; background: rgba(28,26,23,0.94); backdrop-filter: blur(10px); padding: 0.4rem; border-radius: 99px; border: 1px solid var(--line-on-dark); box-shadow: 0 8px 30px rgba(0,0,0,0.3); opacity: 0; pointer-events: none; transition: opacity .35s; }
+  .fnav.show { opacity: 1; pointer-events: auto; }
+  .fb { width: 33px; height: 33px; border-radius: 50%; border: none; background: transparent; color: rgba(244,239,230,0.6); font-family: var(--serif-jp); font-weight: 700; font-size: 0.8rem; cursor: pointer; transition: all .2s; }
+  .fb:hover, .fb.on { background: var(--kin); color: var(--sumi); }
+  @media (max-width:480px) { .fnav { bottom: 0.7rem; } .fb { width: 29px; height: 29px; font-size: 0.72rem; } }
+
+  .bud-sw { display: flex; gap: 0.5rem; margin-bottom: 1.4rem; }
+  .bb { padding: 0.6rem 1.4rem; border-radius: 10px; border: 1px solid var(--line); background: #fff; font-family: var(--serif-jp); font-weight: 600; font-size: 0.88rem; cursor: pointer; transition: all .2s; color: #7a756c; box-shadow: var(--shadow); }
+  .bb.on { background: var(--sumi); color: var(--washi); border-color: var(--sumi); }
+  .bud-plan { display: none; } .bud-plan.on { display: block; animation: fade .35s; }
+
+  .mapembed-wrap { position: relative; margin-top: 1rem; border-radius: var(--r); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: #e8e3d8; min-height: 420px; }
+  .mapembed-wrap iframe { width: 100%; height: 440px; border: 0; display: block; position: relative; z-index: 2; }
+  .mapembed-fallback { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center; padding: 2rem; text-align: center; }
+  .mef-inner { max-width: 420px; }
+  .mef-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+  .mef-title { font-family: var(--serif-jp); font-weight: 700; font-size: 1.05rem; color: var(--sumi); margin-bottom: 0.6rem; }
+  .mef-desc { font-size: 0.85rem; color: #6a655c; line-height: 1.6; }
+
+  :focus-visible { outline: 2px solid var(--kin); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <nav class="hero-nav">
+    <span class="hero-seal">渡韓<br>航日</span>
+    <span class="meta">7 DAYS · 6 NIGHTS · 2027</span>
+  </nav>
+  <div class="hero-body">
+    <div class="hero-eyebrow">釜山 PUS — 博多 FUK · 跨國渡輪夜航</div>
+    <h1>
+      <span class="l1"><span class="b">釜山</span><span class="x">×</span><span class="f">福岡</span></span>
+      <span class="l2">海をこえて、ふたつの街へ ・ 바다를 건너</span>
+    </h1>
+    <p class="hero-sub">搭機抵釜山，三日漫遊海港山城；夜半登上新山茶花號，在玄界灘上沉睡一夜，醒來已是博多。從泡菜到豚骨、從膠囊列車到鋼彈、從彩色山城到溫泉旅館——一趟把韓國與日本縫在一起的渡輪旅程。</p>
+  </div>
+  <div class="hero-tickets">
+    <div class="tk air"><div class="tk-mode">✈ 去程航班</div><div class="tk-route">TPE <span class="ar">→</span> PUS</div><div class="tk-time">1/30 (四) 16:50 → 20:05</div><div class="tk-code">IT606 · 虎航</div></div>
+    <div class="tk ship"><div class="tk-mode">⚓ 跨國渡輪</div><div class="tk-route">PUS <span class="ar">→</span> 博多</div><div class="tk-time">2/1 (六) 19:30 → 2/2 07:30</div><div class="tk-code">新山茶花號 New Camellia</div></div>
+    <div class="tk air"><div class="tk-mode">✈ 回程航班</div><div class="tk-route">FUK <span class="ar">→</span> TPE</div><div class="tk-time">2/5 (三) 20:55 → 22:40</div><div class="tk-code">BR101 · 長榮航空</div></div>
+  </div>
+  <div class="scroll-cue">向下展開航程 ↓</div>
+</header>
+
+<section class="overview"><div class="ov-in">
+  <div class="ov-head"><h2>七日航線圖</h2><span class="n">點選任一天，跳至詳細行程</span></div>
+  <div class="vmap"><button class="vd kr " onclick="jumpTo('day1')"><span class="vf"></span><div class="vn">01</div><div class="vt">1/30 四</div><div class="vl">抵達釜山<br>西面初夜</div></button><button class="vd kr " onclick="jumpTo('day2')"><span class="vf"></span><div class="vn">02</div><div class="vt">1/31 五</div><div class="vl">海岸線<br>甘川洞</div></button><button class="vd kr ferry" onclick="jumpTo('day3')"><span class="vf"></span><div class="vn">03</div><div class="vt">2/1 六</div><div class="vl">南浦掃貨<br>夜船啟航</div></button><button class="vd jp ferry" onclick="jumpTo('day4')"><span class="vf"></span><div class="vn">04</div><div class="vt">2/2 日</div><div class="vl">抵博多<br>二日市溫泉宿</div></button><button class="vd jp " onclick="jumpTo('day5')"><span class="vf"></span><div class="vn">05</div><div class="vt">2/3 一</div><div class="vl">三選一<br>主題日</div></button><button class="vd jp " onclick="jumpTo('day6')"><span class="vf"></span><div class="vn">06</div><div class="vt">2/4 二</div><div class="vl">北九州<br>一日遊</div></button><button class="vd jp " onclick="jumpTo('day7')"><span class="vf"></span><div class="vn">07</div><div class="vt">2/5 三</div><div class="vl">早午餐<br>免稅返台</div></button></div>
+  <div class="lodge">
+    <div class="lc kr"><div class="lt">🇰🇷 釜山住宿 · 預設</div><div class="ln">西面站（서면）周邊 · 2 晚</div><div class="ld">釜山交通核心，1・2 號線交會。地下街、藥妝、24H 豬肉湯飯都在步行圈，去機場、碼頭、海雲台都方便。</div></div>
+    <div class="lc jp"><div class="lt">🇯🇵 福岡住宿 · 預設</div><div class="ln">博多站周邊 2 晚 + 二日市溫泉旅館 1 晚</div><div class="ld">博多站為九州樞紐，地鐵 5 分到機場、JR 直達各景點；2/2 當晚入住二日市溫泉旅館享一泊二食。</div></div>
+  </div>
+</div></section>
+
+<div class="tabbar" id="tabbar"><div class="tabbar-in">
+  <button class="tb on" data-tab="itin" onclick="switchTab('itin')">📋 詳細行程</button>
+  <button class="tb" data-tab="map" onclick="switchTab('map')">🗺️ 每日移動地圖</button>
+  <button class="tb" data-tab="bud" onclick="switchTab('bud')">💰 預算明細</button>
+</div></div>
+<div class="tpanel on" id="tp-itin"><main class="timeline">
+<section class="day kr" id="day1">
+  <div class="day-h"><div class="day-i">01</div><div class="day-ht">
+    <div class="day-d">1月30日（四）<span class="pill">🇰🇷 釜山</span></div>
+    <div class="day-t">抵達釜山 · 西面初夜<span class="sub">부산 도착 · 서면의 밤</span></div>
+  </div></div>
+  <div class="alert info"><span class="i">✈️</span><div>IT606 抵達 <b>20:05</b>，入境後約 20:30 出關。輕裝前往西面，第一晚不排重點行程。</div></div>
+  <div class="route"><div class="route-t">🚇 金海機場 → 西面站（約 45 分鐘）</div><div class="rstep"><div class="rdot">輕</div><div class="rbody"><span class="rleg">金海機場站 → 沙上站（김해경전철 輕軌）</span><span class="rinfo">約 30 分鐘 · <span class='fare'>₩1,700</span></span><div class="rnote">入境大廳購 T-money 卡，之後全程刷卡最方便</div></div></div><div class="rstep"><div class="rdot">地</div><div class="rbody"><span class="rleg">沙上站 → 西面站（地鐵 2 號線）</span><span class="rinfo">約 10 分鐘 · <span class='fare'>₩1,450</span> · <span class='exit'>西面站 7 號出口</span>往飯店街</span><div class="rnote">西面站共 15 個出口，認準 7・9 號出口往樂天百貨方向</div></div></div></div>
+  <div class="spots">
+    <div class="spot main">
+      <div class="spot-k">主行程</div>
+      <div class="spot-n">🛍️ 西面商圈夜逛</div>
+      <div class="spot-desc">釜山最大的地下街與地面購物區，深夜仍熱鬧。入境第一晚輕鬆逛街、熟悉環境，飯店密集步行可達。藥妝、選物、潮牌一應俱全。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★</span></span>「站體上下都很好逛，店多價格實惠，所有地鐵線都能轉乘」——交通與購物的雙重核心。</div>
+      <div class="nearby"><span class="nt">西面地下商街</span><span class="nt">樂天百貨</span><span class="nt">OLIVE YOUNG 藥妝</span><span class="nt">田浦咖啡街</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%EC%84%9C%EB%A9%B4%EC%97%AD%20%EB%B6%80%EC%82%B0" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+    <div class="spot alt">
+      <div class="spot-k">備案</div>
+      <div class="spot-n">🌃 田浦咖啡街（전포 카페거리）</div>
+      <div class="spot-desc">若還有精神，可往西面站東側的田浦咖啡街，是釜山文青咖啡聚落，老屋改建的個性咖啡廳與小酒館林立，適合夜晚小酌散步。</div>
+      
+      <div class="nearby"><span class="nt">個性咖啡廳</span><span class="nt">老屋改建</span><span class="nt">深夜小酌</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%EC%A0%84%ED%8F%AC%20%EC%B9%B4%ED%8E%98%EA%B1%B0%EB%A6%AC%20%EB%B6%80%EC%82%B0" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+  </div>
+  <div class="meal"><span class="meal-i">🍖</span><div><div class="meal-l">消夜 · 推薦區域</div><div class="meal-x"><b>西面豬肉湯飯街（돼지국밥 골목）</b>：西面站步行圈內多家 24H 老店聚集，白湯豬骨湯配白飯與韓式小菜，深夜 11 點後最熱鬧。這一帶也是釜山在地宵夜文化代表，順道可逛通宵的攤販小吃。</div></div></div>
+</section>
+
+<section class="day kr" id="day2">
+  <div class="day-h"><div class="day-i">02</div><div class="day-ht">
+    <div class="day-d">1月31日（五）<span class="pill">🇰🇷 釜山</span></div>
+    <div class="day-t">釜山完整日 · 海岸線與彩色山城<span class="sub">해운대 · 감천문화마을</span></div>
+  </div></div>
+  <div class="spots">
+    <div class="spot main">
+      <div class="spot-k">主行程</div>
+      <div class="spot-n">🚡 海雲台天空膠囊 + 青沙浦</div>
+      <div class="spot-desc">懸掛式膠囊列車沿東海岸行駛，透明車廂俯瞰湛藍大海；接青沙浦黑白條紋雙燈塔海邊棧道，是釜山最人氣的打卡組合。膠囊列車單程約 30 分鐘。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★★</span></span>「從青沙浦站一路坐到海雲台，沿途海景開闊，是釜山必體驗。建議提早上網訂票，現場常常售完」——熱門到要搶票。</div>
+      <div class="nearby"><span class="nt">海雲台海水浴場</span><span class="nt">青沙浦紅白燈塔</span><span class="nt">迎月嶺</span><span class="nt">新世界 Centum City</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%ED%95%B4%EC%9A%B4%EB%8C%80%20%EB%B8%94%EB%A3%A8%EB%9D%BC%EC%9D%B8%ED%8C%8C%ED%81%AC%20%EB%AF%B8%ED%8F%AC%EC%A0%95%EA%B1%B0%EC%9E%A5" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+    <div class="spot alt">
+      <div class="spot-k">備案 / 下午續攤</div>
+      <div class="spot-n">🎨 甘川洞文化村</div>
+      <div class="spot-desc">被稱為「韓國馬丘比丘」，彩色小屋沿山坡疊加，巷弄藏著壁畫與藝術裝置，散策約 1.5–2 小時。可買集章地圖按圖索驥。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★</span></span>「彩色山城超好拍，小王子雕像是必拍點。階梯很多、會爬到鐵腿，但風景值得；冬天淡季人還是不少」——拍照天堂。</div>
+      <div class="nearby"><span class="nt">小王子雕像</span><span class="nt">壁畫巷</span><span class="nt">藝術咖啡廳</span><span class="nt">俯瞰觀景台</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%EA%B0%90%EC%B2%9C%EB%AC%B8%ED%99%94%EB%A7%88%EC%9D%84%20%EB%B6%80%EC%82%B0" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+  </div>
+  <div class="route"><div class="route-t">🚇 Day 2 動線（東 → 西 · 順向不繞路）</div><div class="rstep"><div class="rdot">地</div><div class="rbody"><span class="rleg">西面站 → 海雲台站（2 號線）</span><span class="rinfo">約 25 分鐘 · <span class='fare'>₩1,600</span> · <span class='exit'>海雲台站 3 號出口</span>轉海岸列車</span><div class="rnote">先玩東邊海岸線，膠囊列車起點在尾浦（미포）站</div></div></div><div class="rstep"><div class="rdot">地</div><div class="rbody"><span class="rleg">海雲台 → 土城站（2→1 號線，西面轉乘）</span><span class="rinfo">約 50 分鐘 · <span class='fare'>₩1,600</span> · <span class='exit'>土城站 6 號出口</span></span><div class="rnote">下午轉往西邊甘川洞</div></div></div><div class="rstep"><div class="rdot">🚌</div><div class="rbody"><span class="rleg">土城站 → 甘川洞文化村</span><span class="rinfo">小巴 1-1 / 2 / 2-2 約 10 分鐘 · <span class='fare'>₩1,200</span></span><div class="rnote">土城站 6 號出口外的小巴站搭乘，假日排隊較長</div></div></div></div>
+  <div class="meal"><span class="meal-i">🍱</span><div><div class="meal-l">晚餐 · 推薦區域</div><div class="meal-x"><b>南浦洞 / 西面</b>：甘川洞下山後可到南浦洞 BIFF 廣場一帶，韓式燒肉、部隊鍋、街頭小吃都有；想省時也可直接回西面晚餐。順道可逛南浦洞光復路時尚街。</div></div></div>
+</section>
+
+<section class="day kr" id="day3">
+  <div class="day-h"><div class="day-i">03</div><div class="day-ht">
+    <div class="day-d">2月1日（六）<span class="pill">🇰🇷 釜山 → ⚓ 渡輪</span></div>
+    <div class="day-t">釜山半日 · 夜半啟航<span class="sub">남포동 · 뉴카멜리아호 출항</span></div>
+  </div></div>
+  <div class="alert warn"><span class="i">⚠️</span><div>新山茶花號 <b>19:30 出港</b>，最晚 <b>18:00</b> 前抵釜山國際旅客碼頭（北港）辦出境。白天排輕鬆景點，務必 16:30 前收尾。</div></div>
+  <div class="spots">
+    <div class="spot main">
+      <div class="spot-k">主行程</div>
+      <div class="spot-n">🛍️ 南浦洞 + 國際市場掃貨</div>
+      <div class="spot-desc">出發前最後採買：國際市場、富平罐頭市場（老街）、光復路地下街、BIFF 廣場集中，韓國零食、化妝品、伴手禮一次補齊，且距碼頭近、動線順。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★</span></span>「橫跨好幾個街區的大市場，富平罐頭市場夜間小吃超精彩，海苔飯捲、堅果糖餅必吃」——掃貨兼覓食。</div>
+      <div class="nearby"><span class="nt">國際市場</span><span class="nt">富平罐頭市場</span><span class="nt">光復路地下街</span><span class="nt">BIFF 廣場</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%EA%B5%AD%EC%A0%9C%EC%8B%9C%EC%9E%A5%20%EB%B6%80%EC%82%B0" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+    <div class="spot alt">
+      <div class="spot-k">備案</div>
+      <div class="spot-n">🗼 龍頭山公園 · 釜山塔 / 札嘎其海鮮</div>
+      <div class="spot-desc">若不愛購物，可登龍頭山公園的釜山塔賞港景，或到札嘎其魚市場吃現撈海鮮午餐。兩者皆鄰近碼頭，搭船前不必趕路。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★</span></span>「札嘎其是釜山最大海鮮市場，二樓餐廳可代客料理現買的魚貨，新鮮直接」——海鮮控別錯過。</div>
+      <div class="nearby"><span class="nt">釜山塔</span><span class="nt">龍頭山公園</span><span class="nt">札嘎其市場</span><span class="nt">BIFF 廣場</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%EC%9E%90%EA%B0%88%EC%B9%98%EC%8B%9C%EC%9E%A5%20%EB%B6%80%EC%82%B0" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+  </div>
+  <div class="route"><div class="route-t">🚇 Day 3 動線（行李 + 碼頭）</div><div class="rstep"><div class="rdot">🧳</div><div class="rbody"><span class="rleg">退房 → 行李寄放</span><span class="rinfo">西面或南浦站 Coin Locker（約 ₩3,000–4,000/日）</span><div class="rnote">輕裝逛街，行李待登船前再取</div></div></div><div class="rstep"><div class="rdot">地</div><div class="rbody"><span class="rleg">西面 → 南浦站（1 號線）</span><span class="rinfo">約 15 分鐘 · <span class='fare'>₩1,450</span> · <span class='exit'>南浦站 1・7 號出口</span></span><div class="rnote">南浦洞商圈步行可達</div></div></div><div class="rstep"><div class="rdot">🚕</div><div class="rbody"><span class="rleg">南浦洞 → 釜山北港國際客運碼頭</span><span class="rinfo">計程車約 10 分鐘 · <span class='fare'>₩6,000 左右</span></span><div class="rnote">拖大行李建議直接搭計程車，避免擠地鐵；碼頭離地鐵站尚有一段路</div></div></div></div>
+  <div class="meal"><span class="meal-i">🍜</span><div><div class="meal-l">晚餐 · 推薦區域</div><div class="meal-x"><b>南浦洞（16:00 前）或船上</b>：碼頭附近便利商店可採買登船糧；船上設有付費餐廳與自販機。建議在南浦洞先吃飽，避免船上選擇有限。</div></div></div>
+</section>
+
+<section class="day jp" id="day4">
+  <div class="day-h"><div class="day-i">04</div><div class="day-ht">
+    <div class="day-d">2月2日（日）<span class="pill">🇯🇵 福岡</span></div>
+    <div class="day-t">抵博多 · 入住二日市溫泉一泊二食<span class="sub">博多上陸 · 二日市温泉に泊まる</span></div>
+  </div></div>
+  <div class="alert info"><span class="i">⚓</span><div>07:30 抵博多港，入境手續約至 09:00。先於博多站寄放大行李（或宅急便托運至 2/3 博多飯店），輕裝前往溫泉旅館。</div></div>
+  <div class="alert good"><span class="i">♨️</span><div>今晚住溫泉鄉，享<b>一泊二食</b>（會席晚餐＋和風早餐）。二日市溫泉是九州最古溫泉之一、萬葉集吟詠的美人湯，JR 特急從博多僅 <b>14 分鐘</b>，且緊鄰太宰府，泡湯順遊兩相宜。</div></div>
+  <div class="spots">
+    <div class="spot main">
+      <div class="spot-k">主行程 · 今晚住宿</div>
+      <div class="spot-n">♨️ 二日市溫泉 旅館一泊二食</div>
+      <div class="spot-desc">入住溫泉旅館，泡弱鹼性單純放射能泉（美人湯），晚間享會席料理、隔日和風早餐。二日市溫泉街有「博多湯」「御前湯」兩處立寄湯（¥300 / ¥250）可串門子泡不同湯。源泉掛流、泉質溫潤。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★</span></span>「博多湯是 1860 年創業的老湯屋，源泉掛流、硫磺香淡雅，泡完皮膚滑順。二樓免費休息廣間是亮點，泡完上去喝瓶溫泉牛奶超舒服」——銅板價的正統溫泉。</div>
+      <div class="nearby"><span class="nt">博多湯 ¥300</span><span class="nt">御前湯 ¥250</span><span class="nt">2F 休憩廣間</span><span class="nt">溫泉牛奶</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E4%BA%8C%E6%97%A5%E5%B8%82%E6%B8%A9%E6%B3%89%20%E5%8D%9A%E5%A4%9A%E6%B9%AF" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+    <div class="spot alt">
+      <div class="spot-k">徒步可逛 · 順遊</div>
+      <div class="spot-n">⛩️ 太宰府天滿宮（一站之隔）</div>
+      <div class="spot-desc">二日市到太宰府僅一站，可下午先逛太宰府參道、傍晚回旅館泡湯；或隔天 Check-out 後再順遊。參道老街有梅枝餅、隈研吾設計的星巴克、九州國立博物館（週一公休）。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★★</span></span>「學問之神聖地，參道兩側梅枝餅外脆內Q必吃。本殿整修中設臨時殿堂，綠色屋頂反而是限定景，2026 年後就看不到了」——限定打卡。</div>
+      <div class="nearby"><span class="nt">梅枝餅參道</span><span class="nt">隈研吾星巴克</span><span class="nt">九州國立博物館</span><span class="nt">光明禪寺苔庭</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%AA%E5%AE%B0%E5%BA%9C%E5%A4%A9%E6%BA%80%E5%AE%AE" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+  </div>
+  <div class="alert info"><span class="i">🚶</span><div><b>二日市溫泉徒步圈可逛</b>：天拜山登山口（眺望筑紫野夜景）、武藏寺（九州最古天台宗寺院）、溫泉街老錢湯巡禮、紫川河畔散步。範圍不大，泡湯前後散步剛好。</div></div>
+  <div class="route"><div class="route-t">🚃 博多港 → 二日市溫泉（全程約 40 分鐘）</div><div class="rstep"><div class="rdot">🚕</div><div class="rbody"><span class="rleg">博多港 → 博多站</span><span class="rinfo">港口接駁巴士或計程車約 15–20 分鐘 · <span class='fare'>接駁巴士 ¥260 / 計程車約 ¥1,200</span></span><div class="rnote">先在博多站寄大行李或宅急便托運至 2/3 飯店</div></div></div><div class="rstep"><div class="rdot">JR</div><div class="rbody"><span class="rleg">JR 博多站 → JR 二日市站</span><span class="rinfo">鹿兒島本線快速約 20 分（特急約 14 分）· <span class='fare'>¥290</span></span><div class="rnote">旅館多在西鐵二日市站側，依預訂旅館確認最近站</div></div></div><div class="rstep"><div class="rdot">🚌</div><div class="rbody"><span class="rleg">JR/西鐵二日市站 → 溫泉旅館</span><span class="rinfo">巴士約 10 分（西鐵側 ¥170）或旅館接送</span><div class="rnote">多數溫泉旅館提供車站免費接送，訂房時先預約</div></div></div></div>
+  <div class="meal"><span class="meal-i">🍱</span><div><div class="meal-l">晚餐 · 旅館會席</div><div class="meal-x"><b>旅館一泊二食</b>：晚間於旅館內享會席料理（依旅館供應九州季節食材、地雞、鮮魚等），隔日和風早餐。想加菜可至溫泉街「武藏」等居酒屋吃串燒。</div></div></div>
+</section>
+
+<section class="day jp" id="day5">
+  <div class="day-h"><div class="day-i">05</div><div class="day-ht">
+    <div class="day-d">2月3日（一）<span class="pill">🇯🇵 福岡</span></div>
+    <div class="day-t">主題日 · 四選一<span class="sub">ガンダム / 糸島 / 門司港 / 古着</span></div>
+  </div></div>
+  <div class="alert info"><span class="i">🏨</span><div>今早從二日市溫泉旅館 Check-out，搭 JR 返博多取行李、入住博多站周邊飯店後，輕裝出發。今晚起連住博多 2 晚。</div></div>
+  <div class="opt-sw">
+    <button class="ob on" id="d5bA" onclick="d5opt('A')">A · 鋼彈 + 購物</button>
+    <button class="ob" id="d5bB" onclick="d5opt('B')">B · 糸島海岸</button>
+    <button class="ob" id="d5bC" onclick="d5opt('C')">C · 門司港復古</button>
+    <button class="ob" id="d5bD" onclick="d5opt('D')">D · 大名古著</button>
+  </div>
+  <div class="opanel on" id="d5A"><div class="spots">
+    <div class="spot main">
+      <div class="spot-k">A · 主行程</div>
+      <div class="spot-n">🤖 LaLaport 福岡 · 1:1 鋼彈</div>
+      <div class="spot-desc">等比例 RX-93ff Nu 鋼彈高 24 公尺矗立購物中心外，每日固定時段展演。館內 Gundam SIDE-F 模型店、選物與美食街，鋼彈迷朝聖地。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★</span></span>「平日去不用排隊，鋼彈base 限定鋼普拉庫存充足。1:1 立像配合燈光演出超震撼，旁邊還有鋼彈主題扭蛋與電玩區」——模型控天堂。</div>
+      <div class="nearby"><span class="nt">Gundam SIDE-F</span><span class="nt">1:1 立像展演</span><span class="nt">Nike/Uniqlo 旗艦</span><span class="nt">美食街</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E3%82%89%E3%82%89%E3%81%BD%E3%83%BC%E3%81%A8%E7%A6%8F%E5%B2%A1%20%E3%82%AC%E3%83%B3%E3%83%80%E3%83%A0" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+    <div class="spot alt">
+      <div class="spot-k">A · 副行程 · 市區購物</div>
+      <div class="spot-n">🛍️ 博多 / 中洲購物三寶</div>
+      <div class="spot-desc">回博多站後可一網打盡：寶可夢中心（博多MARUI 2F）、唐吉訶德中洲店（24H 免稅）、博多阪急＋AMU PLAZA 百貨。掃伴手禮、藥妝、玩具最有效率。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★</span></span>「寶可夢中心有福岡限定皮卡丘和拉麵皮卡丘玩偶；唐吉訶德中洲店 24 小時、免稅在二樓，伴手禮一次買齊」——購物效率王。</div>
+      <div class="nearby"><span class="nt">寶可夢中心</span><span class="nt">唐吉訶德中洲店</span><span class="nt">博多阪急</span><span class="nt">AMU PLAZA</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%BB%E3%83%B3ter%E3%83%95%E3%82%AF%E3%82%AA%EC%B9%B4" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+  </div><div class="route"><div class="route-t">🚃 鋼彈 + 市區購物動線</div><div class="rstep"><div class="rdot">JR</div><div class="rbody"><span class="rleg">博多站 → 竹下站 → LaLaport</span><span class="rinfo">JR 鹿兒島本線 2 分 · <span class='fare'>¥160</span> · 竹下站步行 5 分</span><div class="rnote">LaLaport 在竹下站東側</div></div></div><div class="rstep"><div class="rdot">地</div><div class="rbody"><span class="rleg">返博多站 → 中洲川端站（空港線/箱崎線）</span><span class="rinfo">約 5 分 · <span class='fare'>¥210</span> · <span class='exit'>中洲川端站 出口直結</span></span><div class="rnote">唐吉訶德中洲店在川端商店街旁</div></div></div><div class="rstep"><div class="rdot">🚶</div><div class="rbody"><span class="rleg">寶可夢中心</span><span class="rinfo">博多站直結（博多MARUI 2F）</span><div class="rnote">回博多站站內即達，免再搭車</div></div></div></div><div class="meal"><span class="meal-i">🍜</span><div><div class="meal-l">晚餐 · 推薦區域</div><div class="meal-x"><b>天神 / 中洲屋台街</b>：豚骨拉麵、博多串燒、明太子玉子燒配生啤酒，晚 6 點後開張。中洲屋台沿那珂川岸，夜景配屋台氣氛一流。</div></div></div></div><div class="opanel " id="d5B"><div class="spots">
+    <div class="spot main">
+      <div class="spot-k">B · 主行程</div>
+      <div class="spot-n">🌊 糸島半島海岸兜風</div>
+      <div class="spot-desc">福岡近郊最美海岸線，被 MONOCLE 選為「世界最佳小城」第 3 名。二見浦夫婦岩、芥屋大門、海景咖啡廳（PALM BEACH、London Bus Cafe）林立，冬季生蠔小屋正當季。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★★</span></span>「夫婦岩配夕陽超浪漫，海邊咖啡廳一間比一間好拍。冬天來一定要吃牡蠣小屋，現烤生蠔便宜又鮮」——海岸＋美食雙享受。</div>
+      <div class="nearby"><span class="nt">二見浦夫婦岩</span><span class="nt">芥屋大門</span><span class="nt">海景咖啡廳</span><span class="nt">牡蠣小屋</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E7%B3%B8%E5%B3%B6%20%E4%BA%8C%E8%A6%8B%E3%83%B6%E6%B5%A6%20%E5%A4%AB%E5%A9%A6%E5%B2%A9" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+    <div class="spot alt">
+      <div class="spot-k">B · 副行程 · 老街散策</div>
+      <div class="spot-n">🏘️ 筑前前原駅前老街</div>
+      <div class="spot-desc">糸島玄關口筑前前原駅前，是江戶唐津街道宿場町，保留老街風情。有海鮮食堂、魚板店、糸島選物店、咖啡廳，租單車或等巴士的空檔可散步。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★</span></span>「車站走 1 分就有觀光協會租單車，電動車也有。前原老街小店很有味道，海鮮丼新鮮」——文青散策。</div>
+      <div class="nearby"><span class="nt">糸島選物店</span><span class="nt">海鮮食堂</span><span class="nt">租單車起點</span><span class="nt">唐津街道宿場町</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E7%AD%91%E5%89%8D%E5%89%8D%E5%8E%9F%E9%A7%85" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+  </div><div class="route"><div class="route-t">🚃 糸島半島動線（建議用 1day pass）</div><div class="rstep"><div class="rdot">🎫</div><div class="rbody"><span class="rleg">博多巴士總站 → 糸島（高速巴士 いと・しま号）</span><span class="rinfo">「糸島半島 1day free pass」<span class='fare'>¥1,800</span>（含高速巴士＋區內巴士全線）</span><div class="rnote">my route App 限定購買，巴士站不販售；7 個景點一票玩到底</div></div></div><div class="rstep"><div class="rdot">地/JR</div><div class="rbody"><span class="rleg">或 地下鐵空港線直通 → 筑前前原駅</span><span class="rinfo">約 40 分 · <span class='fare'>¥800</span> · 從博多直通不換車</span><div class="rnote">下車後租電動單車（觀光協會步行 1 分）或轉區內巴士</div></div></div><div class="rstep"><div class="rdot">🚌</div><div class="rbody"><span class="rleg">區內：二見浦 ⇄ 芥屋</span><span class="rinfo">昭和巴士每小時約 1 班 · 單程 <span class='fare'>¥200 起</span></span><div class="rnote">班次稀少，務必先查時刻表；牡蠣小屋在加布里/岐志站附近</div></div></div></div><div class="meal"><span class="meal-i">🦪</span><div><div class="meal-l">午餐 · 推薦區域</div><div class="meal-x"><b>糸島漁港 牡蠣小屋</b>（11–3 月產季）：岐志、加布里漁港的牡蠣小屋現烤生蠔，CP 值極高。或在二見浦海景咖啡廳享 brunch。</div></div></div></div><div class="opanel " id="d5C"><div class="spots">
+    <div class="spot main">
+      <div class="spot-k">C · 主行程</div>
+      <div class="spot-n">🚢 門司港復古港町一日遊</div>
+      <div class="spot-desc">明治・大正時代洋風建築群保留完整，門司港駅是日本僅有兩座國家重要文化財車站之一（另一為東京駅）。關門海峽絕景、復古展望室、九州鐵道紀念館，懷舊氣氛濃厚。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★★</span></span>「門司港駅本身就是藝術品，2019 年復原後超美。海邊洋樓群很好拍，名物燒咖哩必吃，還能眺望對岸下關」——昭和懷舊控必訪。</div>
+      <div class="nearby"><span class="nt">門司港駅</span><span class="nt">關門海峽</span><span class="nt">復古展望室</span><span class="nt">九州鐵道紀念館</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E9%96%80%E5%8F%B8%E6%B8%AF%E3%83%AC%E3%83%88%E3%83%AD" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+    <div class="spot alt">
+      <div class="spot-k">C · 副行程 · 名物美食</div>
+      <div class="spot-n">🍛 門司港燒咖哩 + 海峽散步</div>
+      <div class="spot-desc">門司港名物「燒咖哩」（焗烤咖哩飯）店家林立，搭配關門海峽海景用餐。可走藍翼門司吊橋、搭潮風號觀光列車、或到對岸下關唐戶市場吃河豚。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★</span></span>「燒咖哩起司濃郁、咖哩香，海邊吃特別對味。藍翼吊橋會定時開合很有趣」——海港美食散步。</div>
+      <div class="nearby"><span class="nt">燒咖哩</span><span class="nt">藍翼門司吊橋</span><span class="nt">潮風號觀光列車</span><span class="nt">唐戶市場（下關）</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E9%96%80%E5%8F%B8%E6%B8%AF%20%E7%84%BC%E3%81%8D%E3%82%AB%E3%83%AC%E3%83%BC" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+  </div><div class="route"><div class="route-t">🚃 門司港動線（建議 JR 來回）</div><div class="rstep"><div class="rdot">JR</div><div class="rbody"><span class="rleg">博多站 → 門司港駅（鹿兒島本線快速 直通）</span><span class="rinfo">約 1 小時 30 分 · <span class='fare'>¥1,500</span> · 不用換車</span><div class="rnote">車窗可賞海岸線，最省錢；班次每小時 2–3 班</div></div></div><div class="rstep"><div class="rdot">🚄</div><div class="rbody"><span class="rleg">或 特急 Sonic → 小倉 → 門司港（較快）</span><span class="rinfo">約 1 小時 · <span class='fare'>¥2,100</span> · 小倉轉鹿兒島本線</span><div class="rnote">趕時間可選；網路預約「2 枚きっぷ」更划算</div></div></div><div class="rstep"><div class="rdot">🚶</div><div class="rbody"><span class="rleg">門司港駅 → 復古地區</span><span class="rinfo">出站即達，景點集中海邊步行圈</span><div class="rnote">展望室、洋樓群、海峽廣場都在步行範圍</div></div></div></div><div class="meal"><span class="meal-i">🍛</span><div><div class="meal-l">午餐 · 推薦區域</div><div class="meal-x"><b>門司港復古地區</b>：海邊燒咖哩名店（伽哩本舗、Beer工房等），配關門海峽海景。回程經小倉可逛旦過市場、小倉城。</div></div></div></div><div class="opanel " id="d5D"><div class="spots">
+    <div class="spot main">
+      <div class="spot-k">D · 主行程</div>
+      <div class="spot-n">🧥 大名・今泉 古著＆選物崡禮</div>
+      <div class="spot-desc">福岡潮流核心——大名・今泉一帶，是九州最密集的古著與選物聚落。RAGTAG（設計師二手）、各式 vintage 古著屋、個性選物店與咨啡廳交錯，是淘寶與感受福岡街頭文化的最佳區域，步行即可逸遍。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★</span></span>「大名巷弄裡古著店一間接一間，從美式 vintage 到日系古著都有，RAGTAG 能挖到高級二手包與外套。逛累了周邊咨啡廳很多」——潮人挖寶天堂。</div>
+      <div class="nearby"><span class="nt">RAGTAG 大名</span><span class="nt">vintage 古著屋</span><span class="nt">警固神社</span><span class="nt">今泉選物店</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E5%90%8D%20%E5%8F%A4%E7%9D%80%E5%B1%8B%20%E7%A6%8F%E5%B2%A1" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+    <div class="spot alt">
+      <div class="spot-k">D · 副行程 · CP值服飾</div>
+      <div class="spot-n">🛍️ 天神平價日系＋地下街</div>
+      <div class="spot-desc">從大名步行可達天神商圈，WEGO、spinns、GU、UNIQLO 等 CP 值日系平價品牌齊聚；天神地下街有歐風拱廣與快時尚，地下連通不怕冷，購物效率高。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★</span></span>「WEGO、spinns 平價又好買，天神地下街設計復古、店家密集，下雨天也能逛整天」——小資購物首選。</div>
+      <div class="nearby"><span class="nt">WEGO</span><span class="nt">spinns</span><span class="nt">天神地下街</span><span class="nt">PARCO / LOFT</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A9%E7%A5%9E%E5%9C%B0%E4%B8%8B%E8%A1%97%20%E7%A6%8F%E5%B2%A1" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+  </div><div class="route"><div class="route-t">🚇 大名・今泉・天神動線（步行為主）</div><div class="rstep"><div class="rdot">地</div><div class="rbody"><span class="rleg">博多站 → 天神站（空港線）</span><span class="rinfo">約 5 分 · <span class='fare'>¥210</span> · <span class='exit'>天神站 西 12b 出口</span>往大名</span><div class="rnote">大名・今泉就在天神西側，步行 5–10 分</div></div></div><div class="rstep"><div class="rdot">🚶</div><div class="rbody"><span class="rleg">大名 ⇄ 今泉 ⇄ 天神</span><span class="rinfo">區域內步行可達</span><div class="rnote">古著店多藏在巷弄，建議用 Google Map 邊走邊探</div></div></div><div class="rstep"><div class="rdot">地</div><div class="rbody"><span class="rleg">返程 天神 → 博多站</span><span class="rinfo">約 5 分 · <span class='fare'>¥210</span></span><div class="rnote">購物完直接回飯店</div></div></div></div><div class="meal"><span class="meal-i">☕</span><div><div class="meal-l">午餐 · 推薦區域</div><div class="meal-x"><b>大名・今泉巷弄</b>：潮流咨啡廳、漢堡店、町中華林立，逛累了隨處可歇。晚餐可順走到天神屋台或親不孝通居酒屋。</div></div></div></div>
+</section>
+
+<section class="day jp" id="day6">
+  <div class="day-h"><div class="day-i">06</div><div class="day-ht">
+    <div class="day-d">2月4日（二）<span class="pill">🇯🇵 福岡</span></div>
+    <div class="day-t">北九州一日遊 · 二選一<span class="sub">柳川 水郷 / 海の中道</span></div>
+  </div></div>
+  <div class="alert info"><span class="i">🗺️</span><div>福岡近郊經典一日遊二選一：水鄉柳川遊船（炬燵舟暖桌賞河）或海之中道花田（單車海濱漫遊），各有風情。</div></div>
+  <div class="opt-sw">
+    <button class="ob on" id="d6bA" onclick="d6opt('A')">A · 柳川水鄉</button>
+    <button class="ob" id="d6bB" onclick="d6opt('B')">B · 海之中道</button>
+  </div>
+  <div class="opanel on" id="d6A"><div class="spots">
+    <div class="spot main">
+      <div class="spot-k">A · 主行程</div>
+      <div class="spot-n">🛶 柳川水鄉 · 川下り遊船</div>
+      <div class="spot-desc">「水鄉柳川」是九州著名的水道城下町，搭乘小舟由船夫撐篙，穿越柳樹垂蔭的護城河網，沿途欣賞紅磚倉庫、舊藩主庭園與低垂石橋，冬季有「炬燵舟」（暖桌船）可暖呼呼遊河。約 70 分鐘。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★★</span></span>「船夫一邊撐船一邊唱民謠、講解，氣氛悠閒。冬天的炬燵舟超推，鑽進暖桌邊賞景邊取暖，超有風情」——慢遊療癒首選。</div>
+      <div class="nearby"><span class="nt">川下り乘船場</span><span class="nt">柳川藩主立花邸 御花</span><span class="nt">蒸籠鰻魚飯</span><span class="nt">北原白秋故居</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E6%9F%B3%E5%B7%9D%20%E5%B7%9D%E4%B8%8B%E3%82%8A%20%E4%B9%97%E8%88%B9%E5%A0%B4" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+    <div class="spot alt">
+      <div class="spot-k">A · 副行程</div>
+      <div class="spot-n">🏯 柳川藩主立花邸「御花」+ 鰻魚飯</div>
+      <div class="spot-desc">遊船終點附近的立花伯爵宅邸「御花」，是國家名勝庭園，可參觀明治洋館與松濤園。柳川名物「蒸籠鰻魚飯」（せいろ蒸し）是必吃，鰻魚鋪在蒸過的飯上、鹹甜入味。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★</span></span>「御花庭園優雅，洋館有貴族氣派。柳川蒸籠鰻是百年名物，鰻魚軟嫩、飯吸滿醬汁，份量足」——名園配名物。</div>
+      <div class="nearby"><span class="nt">立花邸 御花</span><span class="nt">松濤園</span><span class="nt">蒸籠鰻魚飯</span><span class="nt">沖端水鄉老街</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E6%9F%B3%E5%B7%9D%E8%97%A9%E4%B8%BB%E7%AB%8B%E8%8A%B1%E9%82%B8%20%E5%BE%A1%E8%8A%B1" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+  </div><div class="route"><div class="route-t">🚃 博多/天神 → 柳川（西鐵直達）</div><div class="rstep"><div class="rdot">西鐵</div><div class="rbody"><span class="rleg">西鐵福岡（天神）站 → 西鐵柳川站</span><span class="rinfo">特急約 50 分 · <span class='fare'>¥870</span> · 直達不換車</span><div class="rnote">西鐵推出「柳川特盛套票」含來回車票＋遊船＋美食折扣更划算</div></div></div><div class="rstep"><div class="rdot">🚶/🚌</div><div class="rbody"><span class="rleg">西鐵柳川站 → 川下り乘船場</span><span class="rinfo">步行約 5–10 分或搭接駁巴士</span><div class="rnote">主要乘船場「松月乘船場」等在站前，依套票指定場次</div></div></div><div class="rstep"><div class="rdot">🎫</div><div class="rbody"><span class="rleg">柳川特盛套票（おひるが付）</span><span class="rinfo"><span class='fare'>約 ¥5,000–6,160</span>（含來回車票+遊船+鰻魚飯餐券）</span><div class="rnote">比分開買省約 ¥1,000，天神站售票口購買</div></div></div></div><div class="meal"><span class="meal-i">🍱</span><div><div class="meal-l">午餐 · 推薦區域</div><div class="meal-x"><b>柳川沖端水鄉</b>：名物蒸籠鰻魚飯老店（若松屋、本吉屋等百年老舖）。遊船下船處周邊老街也有甘味處與咖啡廳。</div></div></div></div><div class="opanel " id="d6B"><div class="spots">
+    <div class="spot main">
+      <div class="spot-k">B · 主行程</div>
+      <div class="spot-n">🌸 海之中道海濱公園</div>
+      <div class="spot-desc">540 公頃國家公園，一側博多灣、一側玄界灘。冬季有水仙花田，可租腳踏車穿越花田與松林，全程平路輕鬆愜意。園內有動物森林、摩天輪、玫瑰園。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★★</span></span>「超大公園租單車最讚，花田一望無際像動畫場景。離博多近卻像另一個世界，適合放空一整天」——自然療癒。</div>
+      <div class="nearby"><span class="nt">租腳踏車 ¥500起</span><span class="nt">水仙花田</span><span class="nt">動物森林</span><span class="nt">志賀島</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E6%B5%B7%E3%81%AE%E4%B8%AD%E9%81%93%E6%B5%B7%E6%B5%9C%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+    <div class="spot alt">
+      <div class="spot-k">B · 副行程</div>
+      <div class="spot-n">🏪 博多站百貨大採買</div>
+      <div class="spot-desc">海之中道玩半天後回博多站，把握行程尾聲在阪急、AMU PLAZA、博多 DEITOS 採買，順便把戰利品寄回飯店。寶可夢中心也在此補貨。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★</span></span>「博多站本身就是個大商城，阪急地下美食街、AMU 的伴手禮樓層好逛好買，回飯店超方便」——一站購足。</div>
+      <div class="nearby"><span class="nt">博多阪急</span><span class="nt">AMU PLAZA</span><span class="nt">博多 DEITOS</span><span class="nt">寶可夢中心</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=JR%E5%8D%9A%E5%A4%9A%E3%82%B7%E3%83%86%E3%82%A3" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+  </div><div class="route"><div class="route-t">🚃 博多 → 海之中道（JR 香椎線）</div><div class="rstep"><div class="rdot">JR</div><div class="rbody"><span class="rleg">博多站 → 香椎站 → 海ノ中道站</span><span class="rinfo">共約 30 分 · <span class='fare'>¥480</span> · 香椎站轉香椎線</span><div class="rnote">或從博多搭渡輪（うみなかライン）從博多埠頭直達，海景更佳</div></div></div><div class="rstep"><div class="rdot">🚶</div><div class="rbody"><span class="rleg">海ノ中道站 → 公園入口</span><span class="rinfo">步行約 3 分 · 入園費 <span class='fare'>¥460</span></span><div class="rnote">站出來正對西口</div></div></div><div class="rstep"><div class="rdot">🚲</div><div class="rbody"><span class="rleg">園內租腳踏車</span><span class="rinfo">3 小時 <span class='fare'>¥500 起</span></span><div class="rnote">園區廣大，租車才逛得完；入口處租借站</div></div></div></div><div class="meal"><span class="meal-i">🥪</span><div><div class="meal-l">午餐 · 推薦區域</div><div class="meal-x"><b>園內輕食 / 海邊野餐</b>：公園內有餐廳與輕食攤，建議便利商店買便當在海邊野餐。回博多後可在站內好好晚餐。</div></div></div></div>
+</section>
+
+<section class="day jp" id="day7">
+  <div class="day-h"><div class="day-i">07</div><div class="day-ht">
+    <div class="day-d">2月5日（三）<span class="pill">🇯🇵 福岡 → 返台</span></div>
+    <div class="day-t">博多早午餐 · 免稅返台<span class="sub">最後の博多めし · 帰国</span></div>
+  </div></div>
+  <div class="alert warn"><span class="i">✈️</span><div>BR101（長榮）<b>20:55</b> 起飛，建議 <b>18:30</b> 前到福岡機場。博多站搭地鐵僅 5 分鐘，白天時間非常充裕，可逛到最後一刻。</div></div>
+  <div class="spots">
+    <div class="spot main">
+      <div class="spot-k">上午主活動</div>
+      <div class="spot-n">🐟 柳橋連合市場 / 長濱鮮魚朝食</div>
+      <div class="spot-desc">「博多的廚房」柳橋連合市場，有海鮮丼、玉子燒、明太子老舖；或長濱鮮魚市場周邊吃朝拉麵。離開前最道地的一頓博多早餐，順便採買真空明太子帶回台。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★</span></span>「柳橋市場是在地人的廚房，海鮮丼用料實在、玉子燒現做。明太子老店可真空包裝帶回國」——在地朝食首選。</div>
+      <div class="nearby"><span class="nt">柳橋連合市場</span><span class="nt">海鮮丼</span><span class="nt">明太子老舖</span><span class="nt">玉子燒</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=%E6%9F%B3%E6%A9%8B%E9%80%A3%E5%90%88%E5%B8%82%E5%A0%B4%20%E7%A6%8F%E5%B2%A1" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+    <div class="spot alt">
+      <div class="spot-k">備案 / 較晚退房</div>
+      <div class="spot-n">☕ 博多站晨間咖啡 + 最後採買</div>
+      <div class="spot-desc">若較晚退房，可在博多站內咖啡廳悠閒早餐，順道在 AMU PLAZA、DEITOS、寶可夢中心完成最後採買。拖行李也輕鬆，不必再移動。</div>
+      <div class="review"><span class="rl">🗣 旅人評價 · Google 評論 <span class="stars">★★★★</span></span>「博多站直結商場早上就開，伴手禮樓層選擇多，買完直接搭地鐵去機場，超順」——零負擔收尾。</div>
+      <div class="nearby"><span class="nt">AMU PLAZA</span><span class="nt">博多 DEITOS</span><span class="nt">寶可夢中心</span><span class="nt">明太子伴手禮</span></div>
+      <a class="gmap" href="https://www.google.com/maps/search/?api=1&query=JR%E5%8D%9A%E5%A4%9A%E3%82%B7%E3%83%86%E3%82%A3" target="_blank" rel="noopener">📍 Google Map 開啟</a>
+    </div>
+  </div>
+  <div class="route"><div class="route-t">🚇 博多站 → 福岡機場（超近！）</div><div class="rstep"><div class="rdot">地</div><div class="rbody"><span class="rleg">博多站 → 福岡空港站（空港線）</span><span class="rinfo">2 站約 5 分 · <span class='fare'>¥260</span> · <span class='exit'>國際線需轉免費接駁巴士</span></span><div class="rnote">地鐵到的是國內線航廈，國際線要搭免費接駁巴士約 10–15 分，預留時間</div></div></div></div>
+  <div class="meal"><span class="meal-i">🛍️</span><div><div class="meal-l">機場免稅區</div><div class="meal-x"><b>福岡機場國際線免稅區</b>：九州限定清酒、博多明太子零食、彩妝保養（Shiseido / KOSE）、各式日本糖果。建議先查好品項，過海關後直接下手。</div></div></div>
+</section>
+</main></div>
+<div class="tpanel" id="tp-map"><section class="mapsec">
+  <div class="maph"><h2>每日移動地圖</h2><p class="ms">點日次切換當天動線 · 可直接在地圖內滑動縮放、查周邊與導航</p></div>
+  <div class="mdtabs"><button class="mdt on" data-md="1" onclick="showMapDay(1)">D1 抵達釜山</button><button class="mdt " data-md="2" onclick="showMapDay(2)">D2 海岸線 </button><button class="mdt " data-md="3" onclick="showMapDay(3)">D3 南浦掃貨</button><button class="mdt " data-md="4" onclick="showMapDay(4)">D4 抵博多 </button><button class="mdt " data-md="5" onclick="showMapDay(5)">D5 三選一主</button><button class="mdt " data-md="6" onclick="showMapDay(6)">D6 北九州一</button><button class="mdt " data-md="7" onclick="showMapDay(7)">D7 早午餐 </button></div>
+  <div class="mapcard">
+    <div class="mapcard-head">
+      <div class="mapcard-title" id="mapDayTitle"></div>
+      <a class="mapcard-btn" id="mapRouteBtn" href="#" target="_blank" rel="noopener">🗺️ 在 Google Map 開啟完整路線</a>
+    </div>
+    <div class="mapcard-flow" id="mapFlow"></div>
+  </div>
+  <div class="mapembed-wrap">
+    <iframe id="mapEmbed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen title="當日地圖"></iframe>
+    <div class="mapembed-fallback" id="mapFallback">
+      <div class="mef-inner">
+        <div class="mef-icon">🗺️</div>
+        <div class="mef-title">地圖在預覽模式下無法載入</div>
+        <div class="mef-desc">這是 Claude 預覽環境的安全限制。<b>點上方「在 Google Map 開啟完整路線」</b>即可查看；或將本頁發布／下載後用瀏覽器開啟，地圖就會正常顯示在頁面中。</div>
+      </div>
+    </div>
+  </div>
+  <div class="maptip">💡 <span>地圖可直接滑動、縮放、點標記查周邊；點下方每站名稱可單獨開啟該點。</span></div>
+  <div class="mlegs" id="mapLegs"></div>
+  <div class="mextra">
+  <h3>🛍️ 常逛點速查（點名稱開 Google Map）</h3>
+  <div class="megrid">
+    <div><div class="mec-city kr">🇰🇷 釜山</div>
+      <div class="mei"><b>南浦洞</b>：<a href="https://www.google.com/maps/search/?api=1&query=%EA%B5%AD%EC%A0%9C%EC%8B%9C%EC%9E%A5%20%EB%B6%80%EC%82%B0" target="_blank">國際市場</a>、<a href="https://www.google.com/maps/search/?api=1&query=%EB%B6%80%ED%8F%89%EA%B9%A1%ED%86%B5%EC%8B%9C%EC%9E%A5" target="_blank">富平罐頭市場(老街)</a>、光復路地下街、BIFF 廣場</div>
+      <div class="mei"><b>西面</b>：<a href="https://www.google.com/maps/search/?api=1&query=%EC%84%9C%EB%A9%B4%EC%A7%80%ED%95%98%EC%83%81%EA%B0%80" target="_blank">地下商街</a>、OLIVE YOUNG 藥妝、田浦咖啡街</div>
+      <div class="mei"><b>海雲台</b>：<a href="https://www.google.com/maps/search/?api=1&query=%EC%8B%A0%EC%84%B8%EA%B3%84%20%EC%84%BC%ED%85%80%EC%8B%9C%ED%8B%B0" target="_blank">新世界 Centum City</a>（全球最大百貨）</div>
+    </div>
+    <div><div class="mec-city jp">🇯🇵 福岡</div>
+      <div class="mei"><b>博多站</b>：<a href="https://www.google.com/maps/search/?api=1&query=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%95%E3%82%AF%E3%82%AA%E3%82%AB" target="_blank">寶可夢中心</a>、阪急、AMU PLAZA、DEITOS</div>
+      <div class="mei"><b>中洲</b>：<a href="https://www.google.com/maps/search/?api=1&query=%E3%83%89%E3%83%B3%E3%82%AD%E3%83%9B%E3%83%BC%E3%83%86%E4%B8%AD%E6%B4%B2%E5%BA%97" target="_blank">唐吉訶德(24H免稅)</a>、屋台街</div>
+      <div class="mei"><b>Outlet</b>：<a href="https://www.google.com/maps/search/?api=1&query=%E3%83%9E%E3%83%AA%E3%83%8E%E3%82%A2%E3%82%B7%E3%83%86%E3%82%A3%E7%A6%8F%E5%B2%A1" target="_blank">Marinoa City</a>（海濱·天神巴士333約50分）</div>
+      <div class="mei"><b>天神</b>：PARCO、岩田屋、地下街、LOFT</div>
+      <div class="mei"><b>古著</b>：<a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E5%90%8D%20%E5%8F%A4%E7%9D%80%E5%B1%8B%20%E7%A6%8F%E5%B2%A1" target="_blank">大名・今泉古著街</a>、WEGO、spinns</div>
+    </div>
+  </div>
+</div>
+</section></div>
+
+<div class="tpanel" id="tp-bud"><section class="budsec">
+  <div class="budh"><h2>預算明細估算</h2><p class="bs">以單人估算 · 匯率參考 日幣:台幣 5:1（¥1,000≈NT$200）、韓元:台幣 1:0.021（₩1,000≈NT$21）· 實際依當下匯率與消費習慣浮動</p></div>
+
+  <div class="bud-sw">
+    <button class="bb on" id="bbStd" onclick="budPlan('std')">✨ 輕奢方案</button>
+    <button class="bb" id="bbEco" onclick="budPlan('eco')">🎒 基本方案</button>
+  </div>
+
+  <div class="bud-plan on" id="plan-std">
+  <div class="alert info" style="margin-bottom:1.2rem"><span class="i">✨</span><div>輕奢方案：機票 NT$16,000（含<b>額外加購 2 件托運行李，共 46 公斤</b>）、釜山與博多皆住飯店（每人每晚 NT$1,800）、二日市溫泉享一泊二食。住得舒適、行李帶好帶滿。</div></div>
+  <div class="budtable">
+    <div class="brow head"><div class="bcell">項目</div><div class="bcell r hide-m">當地幣值</div><div class="bcell r">新台幣</div><div class="bcell hide-m">備註</div></div>
+    <div class="brow"><div class="bcell">✈️ 機票（去程+回程）</div><div class="bcell r">—</div><div class="bcell r"><span class="twd">NT$16,000</span></div><div class="bcell">含加購 2 件托運行李（共 46kg）</div></div>
+    <div class="brow"><div class="bcell">⚓ 渡輪 新山茶花號</div><div class="bcell r hide-m">₩90,000 起</div><div class="bcell r"><span class="twd">NT$1,890 起</span></div><div class="bcell hide-m">釜山→博多 二等艙單程；旺季/艙等加價</div></div>
+    <div class="brow"><div class="bcell">🏨 釜山住宿 ×2 晚</div><div class="bcell r hide-m">—</div><div class="bcell r"><span class="twd">NT$3,600</span></div><div class="bcell hide-m">西面飯店 NT$1,800/人/晚</div></div>
+    <div class="brow"><div class="bcell">♨️ 二日市溫泉 ×1 晚</div><div class="bcell r hide-m">¥18,000</div><div class="bcell r"><span class="twd">NT$3,600</span></div><div class="bcell hide-m">一泊二食（會席+早餐）旅館</div></div>
+    <div class="brow"><div class="bcell">🏨 博多住宿 ×2 晚</div><div class="bcell r hide-m">—</div><div class="bcell r"><span class="twd">NT$3,600</span></div><div class="bcell hide-m">博多站周邊飯店 NT$1,800/人/晚</div></div>
+    <div class="brow"><div class="bcell">🚊 釜山市內交通</div><div class="bcell r hide-m">₩25,000</div><div class="bcell r"><span class="twd">NT$525</span></div><div class="bcell hide-m">地鐵+輕軌+計程車（含碼頭）</div></div>
+    <div class="brow"><div class="bcell">🚊 福岡市內+近郊交通</div><div class="bcell r hide-m">¥8,000</div><div class="bcell r"><span class="twd">NT$1,600</span></div><div class="bcell hide-m">JR+地鐵+一日遊（柳川/門司港較高）</div></div>
+    <div class="brow"><div class="bcell">🍜 餐食 ×6.5 天</div><div class="bcell r hide-m">—</div><div class="bcell r"><span class="twd">NT$7,000</span></div><div class="bcell hide-m">平均 NT$1,000/日（含屋台、會席另計）</div></div>
+    <div class="brow"><div class="bcell">🛍️ 購物/門票/雜支</div><div class="bcell r hide-m">—</div><div class="bcell r"><span class="twd">NT$5,000</span></div><div class="bcell hide-m">彈性 · 伴手禮、景點門票、免稅採買</div></div>
+    <div class="brow total"><div class="bcell">合計估算</div><div class="bcell r hide-m">—</div><div class="bcell r"><span class="twd" style="font-size:1.1rem">NT$42,815 起</span></div><div class="bcell hide-m">含機票；不含購物上不封頂</div></div>
+  </div>
+  </div>
+
+  <div class="bud-plan" id="plan-eco">
+  <div class="alert good" style="margin-bottom:1.2rem"><span class="i">🎒</span><div>基本方案：機票 NT$13,000（<b>已含 20kg 托運行李</b>）、釜山住民宿雙人房（每人每晚 NT$800）、博多住雙人房（每人每晚 NT$1,000）、<b>二日市溫泉改為僅泡湯不住宿</b>、省去雜支與門票購物。划算又不失舒適。</div></div>
+  <div class="budtable">
+    <div class="brow head"><div class="bcell">項目</div><div class="bcell r hide-m">當地幣值</div><div class="bcell r">新台幣</div><div class="bcell hide-m">備註</div></div>
+    <div class="brow"><div class="bcell">✈️ 機票（去程+回程）</div><div class="bcell r">—</div><div class="bcell r"><span class="twd">NT$13,000</span></div><div class="bcell">已含 20kg 托運行李</div></div>
+    <div class="brow"><div class="bcell">⚓ 渡輪 新山茶花號</div><div class="bcell r hide-m">₩90,000 起</div><div class="bcell r"><span class="twd">NT$1,890 起</span></div><div class="bcell hide-m">二等艙最低艙等</div></div>
+    <div class="brow"><div class="bcell">🏨 釜山住宿 ×2 晚</div><div class="bcell r hide-m">—</div><div class="bcell r"><span class="twd">NT$1,600</span></div><div class="bcell hide-m">西面民宿雙人房 NT$800/人/晚</div></div>
+    <div class="brow"><div class="bcell">♨️ 二日市溫泉（僅泡湯）</div><div class="bcell r hide-m">¥300</div><div class="bcell r"><span class="twd">NT$60</span></div><div class="bcell hide-m">博多湯泡湯不住宿 · 當天往返博多</div></div>
+    <div class="brow"><div class="bcell">🏨 博多住宿 ×2 晚</div><div class="bcell r hide-m">—</div><div class="bcell r"><span class="twd">NT$2,000</span></div><div class="bcell hide-m">博多雙人房 NT$1,000/人/晚</div></div>
+    <div class="brow"><div class="bcell">🚊 釜山市內交通</div><div class="bcell r hide-m">₩22,000</div><div class="bcell r"><span class="twd">NT$462</span></div><div class="bcell hide-m">多走路、少搭計程車</div></div>
+    <div class="brow"><div class="bcell">🚊 福岡市內+近郊交通</div><div class="bcell r hide-m">¥6,000</div><div class="bcell r"><span class="twd">NT$1,200</span></div><div class="bcell hide-m">一日遊選市區/近距離選項</div></div>
+    <div class="brow"><div class="bcell">🍜 餐食 ×6.5 天</div><div class="bcell r hide-m">—</div><div class="bcell r"><span class="twd">NT$4,500</span></div><div class="bcell hide-m">平均 NT$700/日 · 多平價/便利商店</div></div>
+    <div class="brow"><div class="bcell">🛍️ 購物/門票/雜支</div><div class="bcell r hide-m">—</div><div class="bcell r"><span class="twd">NT$0</span></div><div class="bcell hide-m">省去 · 純走景點不採買</div></div>
+    <div class="brow total"><div class="bcell">合計估算</div><div class="bcell r hide-m">—</div><div class="bcell r"><span class="twd" style="font-size:1.1rem">NT$24,712 起</span></div><div class="bcell hide-m">較輕奢方案省約 NT$18,000</div></div>
+  </div>
+  <div class="alert warn" style="margin-top:1rem"><span class="i">💡</span><div>基本方案 2/2 當晚不住溫泉鄉，泡完博多湯後當天搭 JR 返博多住宿（多一趟往返車資已含於交通估算）。若仍想體驗溫泉住宿氛圍但想省錢，可選溫泉純住宿（不含餐）方案。</div></div>
+  </div>
+
+  <div class="budh"><h2 style="font-size:1.3rem">各地區每晚房價參考</h2><p class="bs">皆以每人每晚估算（雙人房／雙人分攤）</p></div>
+  <div class="lodge-price">
+    <div class="lpc kr"><div class="lpc-t">🇰🇷 釜山 · 西面</div>
+      <div class="lpc-row"><span>民宿雙人房（基本）</span><span><span class="twd">NT$800</span></span></div>
+      <div class="lpc-row"><span>飯店（輕奢）</span><span><span class="twd">NT$1,800</span></span></div>
+      <div class="lpc-row"><span>四星飯店</span><span><span class="twd">NT$2,800+</span></span></div>
+    </div>
+    <div class="lpc onsen"><div class="lpc-t">♨️ 二日市溫泉</div>
+      <div class="lpc-row"><span>僅泡湯（基本）</span><span><span class="twd">NT$60</span></span></div>
+      <div class="lpc-row"><span>純住宿（不含餐）</span><span><span class="twd">NT$2,400</span></span></div>
+      <div class="lpc-row"><span>一泊二食（輕奢）</span><span><span class="twd">NT$3,600</span></span></div>
+    </div>
+    <div class="lpc jp"><div class="lpc-t">🇯🇵 福岡 · 博多站</div>
+      <div class="lpc-row"><span>雙人房（基本）</span><span><span class="twd">NT$1,000</span></span></div>
+      <div class="lpc-row"><span>飯店（輕奢）</span><span><span class="twd">NT$1,800</span></span></div>
+      <div class="lpc-row"><span>四星飯店</span><span><span class="twd">NT$3,000+</span></span></div>
+    </div>
+  </div>
+
+  <div class="budnote"><h3>預算說明與提醒</h3><ul>
+    <li><b>機票行李</b>：基本方案 NT$13,000 已含 20kg 托運；輕奢方案 NT$16,000 含加購 2 件托運（共 46kg），適合大採買。</li>
+    <li><b>渡輪</b>新山茶花號二等艙約 ₩90,000 起，建議官網或台灣代理早鳥預訂，旺季漲幅明顯。</li>
+    <li><b>住宿</b>皆以雙人房每人分攤估算。基本方案釜山民宿、博多雙人房；輕奢方案兩地皆飯店。</li>
+    <li><b>溫泉</b>：輕奢享一泊二食（會席+早餐）；基本僅泡博多湯（¥300）不住宿，當天往返博多。</li>
+    <li><b>交通</b>釜山辦 T-money、福岡用 SUGOCA/實體 IC 卡最方便；糸島建議買 1day pass（¥1,800）、柳川買特盛套票省更多。</li>
+    <li><b>退稅</b>：日本免稅店消費滿 ¥5,000 可退稅，記得帶護照；唐吉訶德、各大百貨均可。</li>
+  </ul></div>
+</section></div>
+
+<footer>
+  <span class="b">釜山</span> × <span class="f">福岡</span> · 跨國渡輪雙城之旅 · 7 天 6 夜 · 2027.01.30 – 02.05
+  <div class="disc">交通票價與營業資訊為查詢時點之估算，出發前請以官方公告為準 · 新山茶花號船期請務必至官網確認</div>
+</footer>
+<nav class="fnav" id="fnav" aria-label="日次快速導覽"><button class="fb" onclick="jumpTo('day1')">1</button><button class="fb" onclick="jumpTo('day2')">2</button><button class="fb" onclick="jumpTo('day3')">3</button><button class="fb" onclick="jumpTo('day4')">4</button><button class="fb" onclick="jumpTo('day5')">5</button><button class="fb" onclick="jumpTo('day6')">6</button><button class="fb" onclick="jumpTo('day7')">7</button></nav>
+<script>
+function jumpTo(id){ switchTab('itin'); setTimeout(function(){ var el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },60); }
+function switchTab(t){
+  document.querySelectorAll('.tpanel').forEach(function(p){ p.classList.toggle('on', p.id==='tp-'+t || (t==='itin'&&p.id==='tp-itin')); });
+  document.querySelectorAll('.tb').forEach(function(b){ b.classList.toggle('on', b.dataset.tab===t); });
+  window.scrollTo({top: document.getElementById('tabbar').offsetTop-1, behavior:'smooth'});
+  if(t==='map'){ showMapDay(currentMapDay); }
+}
+function d5opt(o){
+  ['A','B','C','D'].forEach(function(x){ document.getElementById('d5'+x).classList.toggle('on', x===o); document.getElementById('d5b'+x).classList.toggle('on', x===o); });
+}
+function d6opt(o){
+  ['A','B'].forEach(function(x){ document.getElementById('d6'+x).classList.toggle('on', x===o); document.getElementById('d6b'+x).classList.toggle('on', x===o); });
+}
+function budPlan(p){
+  document.getElementById('plan-std').classList.toggle('on', p==='std');
+  document.getElementById('plan-eco').classList.toggle('on', p==='eco');
+  document.getElementById('bbStd').classList.toggle('on', p==='std');
+  document.getElementById('bbEco').classList.toggle('on', p==='eco');
+}
+
+// ===== 地圖 =====
+var MAPDATA = {"1": {"title": "抵達釜山 → 西面", "center": "서면역 부산", "stops": [{"name": "金海國際機場", "tag": "hub", "q": "김해국제공항", "move": "20:05 抵達 · IT606"}, {"name": "沙上站", "tag": "hub", "q": "사상역 부산", "move": "輕軌 30 分 ¥1,700 → 轉地鐵 2 號線"}, {"name": "西面站 🏨", "tag": "hub", "q": "서면역 부산", "move": "地鐵 2 號線 10 分 · 7 號出口往飯店"}, {"name": "西面地下商街", "tag": "shop", "q": "서면지하상가", "move": "西面站直結 · 夜逛購物"}, {"name": "豬肉湯飯街", "tag": "food", "q": "서면 돼지국밥거리", "move": "步行圈 · 24H 消夜"}]}, "2": {"title": "海岸線 → 甘川洞", "center": "감천문화마을", "stops": [{"name": "西面站 🏨", "tag": "hub", "q": "서면역 부산", "move": "出發"}, {"name": "海雲台天空膠囊", "tag": "see", "q": "해운대 블루라인파크", "move": "地鐵 25 分 ¥1,600 · 3 號出口"}, {"name": "青沙浦紅白燈塔", "tag": "see", "q": "청사포 다릿돌전망대", "move": "膠囊列車沿線 · 海景打卡"}, {"name": "甘川洞文化村", "tag": "see", "q": "감천문화마을", "move": "土城站轉小巴 10 分 ¥1,200"}, {"name": "南浦洞 BIFF", "tag": "food", "q": "BIFF광장 부산", "move": "晚餐 · 街頭小吃"}]}, "3": {"title": "南浦掃貨 → 夜船", "center": "부산항국제여객터미널", "stops": [{"name": "西面站 🏨", "tag": "hub", "q": "서면역 부산", "move": "退房 · 寄行李"}, {"name": "國際市場", "tag": "shop", "q": "국제시장 부산", "move": "地鐵 15 分 ¥1,450 · 南浦站"}, {"name": "富平罐頭市場(老街)", "tag": "shop", "q": "부평깡통시장", "move": "國際市場旁 · 夜市小吃"}, {"name": "龍頭山·釜山塔", "tag": "see", "q": "부산타워", "move": "備案 · 賞港景"}, {"name": "釜山北港碼頭 ⚓", "tag": "hub", "q": "부산항국제여객터미널", "move": "計程車 10 分 ¥6,000 · 18:00 到港"}]}, "4": {"title": "抵博多 → 二日市溫泉", "center": "二日市温泉 博多湯", "stops": [{"name": "博多港 ⚓", "tag": "hub", "q": "博多港国際ターミナル", "move": "07:30 抵達 · 入境"}, {"name": "博多站 🏨", "tag": "hub", "q": "博多駅", "move": "接駁 15 分 · 寄大行李"}, {"name": "二日市溫泉(博多湯)", "tag": "see", "q": "二日市温泉 博多湯", "move": "JR 特急 14 分 ¥290 · 今晚住宿"}, {"name": "太宰府天滿宮", "tag": "see", "q": "太宰府天満宮", "move": "一站之隔 · 順遊參道"}, {"name": "梅枝餅參道", "tag": "food", "q": "太宰府 参道", "move": "梅枝餅・隈研吾星巴克"}]}, "5": {"title": "三選一主題日", "center": "ららぽーと福岡", "stops": [{"name": "博多站 🏨", "tag": "hub", "q": "博多駅", "move": "取行李·入住·出發"}, {"name": "LaLaport 1:1 鋼彈(A)", "tag": "see", "q": "ららぽーと福岡 ガンダム", "move": "JR 竹下站 2 分 ¥160"}, {"name": "糸島 二見浦(B)", "tag": "see", "q": "糸島 二見ヶ浦 夫婦岩", "move": "高速巴士/地鐵 40 分"}, {"name": "門司港復古(C)", "tag": "see", "q": "門司港レトロ", "move": "JR 快速 1.5hr ¥1,500"}, {"name": "唐吉訶德中洲店", "tag": "shop", "q": "ドンキホーテ中洲店", "move": "24H 免稅 · 市區購物"}, {"name": "寶可夢中心", "tag": "shop", "q": "ポケモンセンターフクオカ", "move": "博多MARUI 2F"}, {"name": "大名古著街(D)", "tag": "shop", "q": "大名 古着屋 福岡", "move": "選項 D · 古著淘寶"}]}, "6": {"title": "北九州一日遊", "center": "柳川 川下り", "stops": [{"name": "天神/博多 🏨", "tag": "hub", "q": "西鉄福岡天神駅", "move": "出發"}, {"name": "柳川川下り(A)", "tag": "see", "q": "柳川 川下り 乗船場", "move": "西鐵 50 分 ¥870"}, {"name": "立花邸御花(A)", "tag": "see", "q": "柳川藩主立花邸 御花", "move": "遊船終點附近·鰻魚飯"}, {"name": "海之中道公園(B)", "tag": "see", "q": "海の中道海浜公園", "move": "JR 30 分 ¥480"}, {"name": "博多站百貨(B)", "tag": "shop", "q": "JR博多シティ", "move": "下午回程大採買"}]}, "7": {"title": "早午餐 → 返台", "center": "福岡空港", "stops": [{"name": "博多站 🏨", "tag": "hub", "q": "博多駅", "move": "退房"}, {"name": "柳橋連合市場", "tag": "food", "q": "柳橋連合市場 福岡", "move": "海鮮丼·明太子朝食"}, {"name": "AMU/寶可夢採買", "tag": "shop", "q": "JR博多シティ", "move": "最後補貨"}, {"name": "福岡機場 ✈", "tag": "hub", "q": "福岡空港", "move": "地鐵 5 分 ¥260 · 20:55 起飛"}]}};
+var currentMapDay = 1;
+var tagLabel = {shop:'購物',food:'美食',see:'景點',hub:'樞紐'};
+var tagColor = {shop:'#a85d18',food:'#b03a2e',see:'#1c5a78',hub:'#6a655c'};
+function gmapUrl(q){ return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q); }
+function gmapEmbed(stops){
+  // 免 API key 的嵌入格式：用第一站與最後一站做路線，中間為途經點
+  var pts = stops.map(function(s){ return s.q; });
+  var origin = encodeURIComponent(pts[0]);
+  var dest = encodeURIComponent(pts[pts.length-1]);
+  // maps.google.com/maps?saddr=...&daddr=...&output=embed 支援多段（daddr 用 "to:" 串接）
+  var daddr = pts.slice(1).map(function(p){ return encodeURIComponent(p); }).join('+to:');
+  return 'https://maps.google.com/maps?saddr='+origin+'&daddr='+daddr+'&output=embed';
+}
+function gmapDir(stops){
+  // 多站導航：origin + destination + waypoints
+  var pts = stops.map(function(s){ return s.q; });
+  var origin = encodeURIComponent(pts[0]);
+  var dest = encodeURIComponent(pts[pts.length-1]);
+  var way = pts.slice(1,-1).map(encodeURIComponent).join('|');
+  var url = 'https://www.google.com/maps/dir/?api=1&origin='+origin+'&destination='+dest;
+  if(way) url += '&waypoints='+way;
+  return url;
+}
+
+function showMapDay(d){
+  currentMapDay=d;
+  document.querySelectorAll('.mdt').forEach(function(b){ b.classList.toggle('on', +b.dataset.md===d); });
+  var data=MAPDATA[d];
+  // 標題 + 路線按鈕
+  document.getElementById('mapDayTitle').textContent = 'Day '+d+' · '+data.title;
+  document.getElementById('mapRouteBtn').href = gmapDir(data.stops);
+  // 嵌入地圖：用當天路線的多站導航 embed（免 API key）
+  var embedUrl = gmapEmbed(data.stops);
+  var ifr = document.getElementById('mapEmbed');
+  if(ifr) ifr.src = embedUrl;
+  // 流程圖（站點橫向連接）
+  var flow = data.stops.map(function(s,i){
+    var arrow = i < data.stops.length-1 ? '<span class="flow-arrow">→</span>' : '';
+    return '<a class="flow-node" href="'+gmapUrl(s.q)+'" target="_blank" rel="noopener" style="border-color:'+tagColor[s.tag]+'">'+
+      '<span class="flow-dot" style="background:'+tagColor[s.tag]+'">'+(i+1)+'</span>'+
+      '<span class="flow-name">'+s.name+'</span></a>'+arrow;
+  }).join('');
+  document.getElementById('mapFlow').innerHTML = flow;
+  // 詳細站點清單
+  var legs = data.stops.map(function(s,i){
+    return '<div class="mleg"><div class="mleg-n" style="background:'+tagColor[s.tag]+'">'+(i+1)+'</div>'+
+      '<div class="mleg-b"><div class="mleg-h"><span class="mleg-name"><a href="'+gmapUrl(s.q)+'" target="_blank" rel="noopener">'+s.name+'</a></span>'+
+      '<span class="mtag '+s.tag+'">'+tagLabel[s.tag]+'</span></div>'+
+      '<div class="mleg-move">'+s.move+'</div></div></div>';
+  }).join('');
+  document.getElementById('mapLegs').innerHTML = legs;
+}
+
+// 浮動導覽
+var fnav=document.getElementById('fnav');
+var hero=document.querySelector('.hero');
+new IntersectionObserver(function(es){ es.forEach(function(e){ fnav.classList.toggle('show', !e.isIntersecting); }); },{threshold:0.2}).observe(hero);
+var dayIds=['day1','day2','day3','day4','day5','day6','day7'];
+var fbs=fnav.querySelectorAll('.fb');
+new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ var idx=dayIds.indexOf(e.target.id); fbs.forEach(function(b,i){ b.classList.toggle('on', i===idx); }); } }); },{threshold:0.4, rootMargin:'-20% 0px -40% 0px'}).forEach=null;
+var dayObs=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ var idx=dayIds.indexOf(e.target.id); fbs.forEach(function(b,i){ b.classList.toggle('on', i===idx); }); } }); },{threshold:0.4, rootMargin:'-20% 0px -40% 0px'});
+dayIds.forEach(function(id){ var el=document.getElementById(id); if(el) dayObs.observe(el); });
+
+showMapDay(1);
+</script>
+
+</body>
+</html>
